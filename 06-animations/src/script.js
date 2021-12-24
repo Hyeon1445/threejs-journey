@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import gsap from 'gsap'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -32,10 +33,13 @@ renderer.setSize(sizes.width, sizes.height)
 
 
 // Animations
-const clock = new THREE.Clock() // 단위 seconds
+// const clock = new THREE.Clock() // 단위 seconds
+gsap.to(mesh.position, { duration: 1, delay: 1,  x: 2 })
+gsap.to(mesh.position, { duration: 1, delay: 2,  x: 0 })
+
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
-  mesh.rotation.y = elapsedTime * Math.PI * 2 // 1초에 한바퀴
+  // const elapsedTime = clock.getElapsedTime()
+  // mesh.rotation.y = elapsedTime * Math.PI * 2 // 1초에 한바퀴
   // mesh.position.x = Math.cos(elapsedTime)
   // mesh.position.y = Math.sin(elapsedTime)
 
