@@ -32,12 +32,16 @@ renderer.setSize(sizes.width, sizes.height)
 
 
 // Animations
-let time = Date.now()
+const clock = new THREE.Clock() // 단위 seconds
 const tick = () => {
-  const currentTime = Date.now()
-  const deltaTime = currentTime - time
-  time = currentTime
-  mesh.rotation.y += 0.002 * deltaTime
+  const elapsedTime = clock.getElapsedTime()
+  mesh.rotation.y = elapsedTime * Math.PI * 2 // 1초에 한바퀴
+  // mesh.position.x = Math.cos(elapsedTime)
+  // mesh.position.y = Math.sin(elapsedTime)
+
+  // camera.position.x = Math.cos(elapsedTime)
+  // camera.position.y = Math.sin(elapsedTime)
+  // camera.lookAt(mesh.position)
   renderer.render(scene, camera)
   window.requestAnimationFrame(tick)
 }
