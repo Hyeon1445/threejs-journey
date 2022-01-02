@@ -27,10 +27,18 @@ scene.add(mesh)
 const aspectRatio = sizes.width / sizes.height
 const fov = 75
 // field of view: vertical vision angle
-const camera = new THREE.PerspectiveCamera(fov, aspectRatio, 0.1, 100)
+// const camera = new THREE.PerspectiveCamera(fov, aspectRatio, 0.1, 100)
 // perspective: 실제 카메라처럼. 테두리부분 왜곡o
 
-
+const camera = new THREE.OrthographicCamera(
+  -1 * aspectRatio,
+  1 * aspectRatio, 
+  1,
+  -1,
+  0.1,
+  100
+)
+// orthographic: 평행하게 찍은것같은 느낌. 테두리부분 왜곡x
 camera.position.x = 2
 camera.position.y = 2
 camera.position.z = 2
