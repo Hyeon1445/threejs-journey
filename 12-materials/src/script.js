@@ -60,7 +60,10 @@ const scene = new THREE.Scene()
 // material.matcap = matcapTexture
 
 // const material = new THREE.MeshDepthMaterial()
-const material = new THREE.MeshLambertMaterial()
+// const material = new THREE.MeshLambertMaterial()
+const material = new THREE.MeshPhongMaterial()
+material.shininess = 100
+material.specular = new THREE.Color(0xff0000)
 
 /**
  * Lights
