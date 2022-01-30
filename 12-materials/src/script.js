@@ -31,15 +31,15 @@ const scene = new THREE.Scene()
 /**
  * Objects
  */
-const material = new THREE.MeshBasicMaterial()
+// const material = new THREE.MeshBasicMaterial()
 // material.color.set('purple')
 // material.color.set('#ff0000')
 // material.color = new THREE.Color('teal')
 // material.color = new THREE.Color('rgb(100, 50, 30)')
 // material.color = new THREE.Color(0xff00ff)
 
-material.map = doorColorTexture
-material.color = new THREE.Color(0x00ff00)
+// material.map = doorColorTexture
+// material.color = new THREE.Color(0x00ff00)
 // green door
 
 // material.opacity = 0.5
@@ -48,9 +48,14 @@ material.color = new THREE.Color(0x00ff00)
 
 // material.wireframe = true
 
-material.transparent = true
-material.alphaMap = doorAlphaTexture // use alphaMap to seperate visible part and hidden part
-material.side = THREE.DoubleSide // to see all sides of the geometry
+// material.transparent = true
+// material.alphaMap = doorAlphaTexture // use alphaMap to seperate visible part and hidden part
+// material.side = THREE.DoubleSide // to see all sides of the geometry
+
+const material = new THREE.MeshNormalMaterial()
+// material.wireframe = true
+material.flatShading = true
+
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 16, 16),
