@@ -56,11 +56,10 @@ const scene = new THREE.Scene()
 /**
  * Object
  */
-// const geometry = new THREE.BoxGeometry(1, 1, 1)
-const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-// const geometry = new THREE.SphereBufferGeometry(1, 32, 32)
-// const geometry = new THREE.ConeBufferGeometry(1, 1, 32)
-// const geometry = new THREE.TorusBufferGeometry(1, 0.35, 32, 100)
+const geometry = new THREE.BoxGeometry(1, 1, 1)
+// const geometry = new THREE.SphereGeometry(1, 32, 32)
+// const geometry = new THREE.ConeGeometry(1, 1, 32)
+// const geometry = new THREE.TorusGeometry(1, 0.35, 32, 100)
 const material = new THREE.MeshBasicMaterial({ map: colorTexture })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
