@@ -14,7 +14,7 @@ const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
 const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
 const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
 
-const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
 const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 
 
@@ -52,9 +52,12 @@ const scene = new THREE.Scene()
 // material.alphaMap = doorAlphaTexture // use alphaMap to seperate visible part and hidden part
 // material.side = THREE.DoubleSide // to see all sides of the geometry
 
-const material = new THREE.MeshNormalMaterial()
+// const material = new THREE.MeshNormalMaterial()
 // material.wireframe = true
-material.flatShading = true
+// material.flatShading = true
+
+const material = new THREE.MeshMatcapMaterial()
+material.matcap = matcapTexture
 
 
 const sphere = new THREE.Mesh(
