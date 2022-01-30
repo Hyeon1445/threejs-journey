@@ -42,11 +42,15 @@ material.map = doorColorTexture
 material.color = new THREE.Color(0x00ff00)
 // green door
 
-material.opacity = 0.5
-material.transparent = true
+// material.opacity = 0.5
+// material.transparent = true
 // set transparency
 
 // material.wireframe = true
+
+material.transparent = true
+material.alphaMap = doorAlphaTexture // use alphaMap to seperate visible part and hidden part
+material.side = THREE.DoubleSide // to see all sides of the geometry
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 16, 16),
