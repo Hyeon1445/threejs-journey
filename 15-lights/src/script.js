@@ -31,12 +31,16 @@ gui.add(directionalLight, 'intensity').min(0).max(1).step(0.01)
 const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 1)
 scene.add(hemisphereLight)
 
-const pointLight = new THREE.PointLight(0xffffff, 0.5)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
+const pointLight = new THREE.PointLight(0xff9000, 0.5)
+pointLight.position.set(1, - 0.5, 1)
 scene.add(pointLight)
 gui.add(pointLight, 'intensity').min(0).max(1).step(0.01)
+
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 1, 1)
+rectAreaLight.position.set(- 1.5, 0, 1.5)
+rectAreaLight.lookAt(new THREE.Vector3())
+scene.add(rectAreaLight)
+
 /**
  * Objects
  */
