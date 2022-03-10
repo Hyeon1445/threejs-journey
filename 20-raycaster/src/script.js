@@ -73,7 +73,21 @@ window.addEventListener('mousemove', (_event) => {
   mouse.y = - (_event.clientY / sizes.height) * 2 + 1
   // console.log(mouse)
 })
-
+window.addEventListener('click', () => {
+  if(currentIntersect) {
+    switch(currentIntersect.object) {
+      case object1:
+        console.log('click on object1')
+        break
+      case object2:
+        console.log('click on object2')
+        break
+      case object3:
+        console.log('click on object3')
+        break
+    }
+  }
+})
 
 /**
  * Camera
