@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import CANNON from 'cannon'
+
 /**
  * Debug
  */
@@ -31,6 +32,64 @@ const environmentMapTexture = cubeTextureLoader.load([
   '/textures/environmentMaps/0/pz.png',
   '/textures/environmentMaps/0/nz.png'
 ])
+
+/**
+ * Physics
+ */
+// World
+const world = new CANNON.World()
+world.gravity.set(0, - 9.82, 0) // gravity on earth(x, y, z)
+
+// Materials
+// const concreteMaterial = new CANNON.Material('concrete')
+// const plasticMaterial = new CANNON.Material('plastic')
+
+// const concretePlasticContactMaterial = new CANNON.ContactMaterial(
+//   concreteMaterial,
+//   plasticMaterial,
+//   {
+//     friction: 0.1, // 마찰
+//     restitution: 0.7 // 복원력
+//   }
+// ) // plastic 과 concrete가 만났을 때에 대한 값들을 정의.
+// world.addContactMaterial(concretePlasticContactMaterial)
+
+const defaultMaterial = new CANNON.Material('default')
+const defaultContactMaterial = new CANNON.ContactMaterial(
+  defaultMaterial,
+  defaultMaterial,
+  {
+    friction: 0.1, // 마찰
+    restitution: 0.7 // 복원력
+  }
+) 
+world.addContactMaterial(defaultContactMaterial)
+world.defaultContactMaterial = defaultContactMaterial
+// ** 이렇게 하면 sphere, floor 의 material 지워도 동일하게 동작
+// ** plastic, concrete는 알아보기 좋게 쓴거고, 어떤 이름으로 해도 가능.
+
+// Sphere
+const sphereShape = new CANNON.Sphere(0.5)
+const sphereBody = new CANNON.Body({
+  mass: 1,
+  position: new CANNON.Vec3(0, 3, 0),
+  shape: sphereShape,
+  // material: plasticMaterial,
+})
+world.addBody(sphereBody)
+
+// Floor
+const floorShape = new CANNON.Plane()
+const floorBody = new CANNON.Body({
+  mass: 0, // because floor is static (do not move)
+  // material: concreteMaterial,
+})
+floorBody.addShape(floorShape) // floorBody.shape = floorShape
+floorBody.quaternion.setFromAxisAngle(
+  new CANNON.Vec3( - 1, 0, 0),
+  Math.PI * 0.5
+) // three.js의 floor가 x축 기준 -90도 회전했으므로 cannon.js의 floor도 회전
+world.addBody(floorBody)
 
 /**
  * Test sphere
@@ -131,9 +190,17 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 const clock = new THREE.Clock()
+let oldElapsedTime = 0
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
+  const deltaTime = elapsedTime - oldElapsedTime
+  oldElapsedTime = elapsedTime
+
+  // Update Physics World
+  world.step(1 / 60, deltaTime, 3) // 1/60 (60fps)
+
+  sphere.position.copy(sphereBody.position)
 
   // Update controls
   controls.update()
