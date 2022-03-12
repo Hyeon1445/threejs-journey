@@ -2,7 +2,9 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
-import CANNON from 'cannon'
+// import CANNON from 'cannon' // 오랫동안 업데이트 X
+import * as CANNON from 'cannon-es' // cannon.js repo를 fork해서 최근까지 업데이트 됨.
+// cannon, cannon-es가 비교적 이해하기가 쉬운편/ Ammo.js(@hapi/ammo) 가 성능이 좋고 더 유명하고 더 많은 기능
 
 /**
  * Debug
