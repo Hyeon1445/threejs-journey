@@ -11,7 +11,10 @@ const parameters = {
   materialColor: '#ffeded'
 }
 
-gui.addColor(parameters, 'materialColor').onChange(() => material.color.set(parameters.materialColor))
+gui.addColor(parameters, 'materialColor').onChange(() => {
+  material.color.set(parameters.materialColor)
+  particlesMaterial.color.set(parameters.materialColor)
+})
 
 /**
  * Base
@@ -61,6 +64,30 @@ scene.add(mesh1, mesh2, mesh3)
 
 const sectionMeshes = [ mesh1, mesh2, mesh3 ]
 
+/**
+ * Particles
+ */
+// Geometry
+const particlesCount = 200
+const positions = new Float32Array(particlesCount * 3)
+for(let i = 0; i < particlesCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 10
+  positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * sectionMeshes.length
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 10
+}
+const particlesGeometry = new THREE.BufferGeometry()
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+// Material
+const particlesMaterial = new THREE.PointsMaterial({
+  color: parameters.materialColor,
+  sizeAttenuation: true,
+  size: 0.03
+})
+
+// Points
+const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(particles)
 /**
  * Lights
  */
