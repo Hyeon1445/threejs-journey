@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as dat from 'lil-gui'
 
 /**
@@ -19,12 +20,16 @@ const scene = new THREE.Scene()
 /**
  * Models
  */
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('/draco/')
 const gltfLoader = new GLTFLoader()
+gltfLoader.setDRACOLoader(dracoLoader)
 gltfLoader.load(
   // '/models/Duck/glTF/Duck.gltf',
+  '/models/Duck/glTF-Draco/Duck.gltf', // gltf-dracco is lighter
   // '/models/Duck/glTF-Binary/Duck.glb',
   // '/models/Duck/glTF-Embedded/Duck.gltf',
-  '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+  // '/models/FlightHelmet/glTF/FlightHelmet.gltf',
   (gltf) => { // onLoade
     console.log(gltf)
     // scene.add(gltf.scene.children[0])
