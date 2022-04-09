@@ -53,7 +53,7 @@ environmentMap.encoding = THREE.sRGBEncoding
 scene.background = environmentMap
 scene.environment = environmentMap
 
-debugObject.envMapIntensity = 2
+debugObject.envMapIntensity = 1
 gui.add(debugObject, 'envMapIntensity').min(0).max(10).step(0.001).onChange(() => {
     updateAllMaterials()
 })
@@ -62,9 +62,9 @@ gui.add(debugObject, 'envMapIntensity').min(0).max(10).step(0.001).onChange(() =
  * Models
  */
 gltfLoader.load(
-    '/models/hamburger.glb',
+    '/models/StrawberryDonut4.glb',
     (gltf) => {
-        gltf.scene.scale.set(0.3, 0.3, 0.3)
+        gltf.scene.scale.set(10, 10, 10)
         gltf.scene.position.set(0, - 1, 0)
         gltf.scene.rotation.y = Math.PI * 0.5
         scene.add(gltf.scene)
@@ -78,7 +78,7 @@ gltfLoader.load(
 /**
  * Lights
  */
-const directionalLight = new THREE.DirectionalLight('#ffffff', 3)
+const directionalLight = new THREE.DirectionalLight('#ffffff', 1)
 directionalLight.position.set(0.25, 3, - 2.2)
 directionalLight.castShadow = true
 directionalLight.shadow.camera.far = 15
