@@ -1,30 +1,5 @@
-class Robot {
-    constructor(name, legs) {
-        this.name = name
-        this.legs = legs
-        console.log(`robot name is ${name}`)
-    }
-    sayHi() {
-        console.log(`hello ${this.name}`)
-    }
-}
-
-class FlyingRobot extends Robot {
-    constructor(name, legs) {
-        super(name, legs) // extends에서는 constructor쓰려면 super 호출!, base가 되는 class를 참조
-        super.sayHi() // FlyingRobot의 sayHi가 아닌 원본인 Robot의 sayHi
-        this.sayHi() // FlyingRobot의 sayHi
-    }
-    sayHi() { // override
-        console.log('flyingrobot sayHi')
-    }
-    takeOff() {
-        console.log(`take off ${this.name}`)
-    }
-    land() {
-        console.log(`land ${this.name}`)
-    }
-}
+import Robot from './Robot.js'
+import FlyingRobot from './FlyingRobot.js'
 
 const robot = new Robot('robot11', 2) 
 const flyingRobot = new FlyingRobot('flying', 4)
