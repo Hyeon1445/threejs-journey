@@ -1,14 +1,7 @@
-import Robot from './Robot.js'
-import FlyingRobot from './FlyingRobot.js'
+import './style.css'
+import Experience from './Experience/Experience.js'
+const experience = new Experience(document.querySelector('canvas.webgl'))
 
-const robot = new Robot('robot11', 2) 
-const flyingRobot = new FlyingRobot('flying', 4)
-robot.sayHi()
-console.log(robot.legs)
-flyingRobot.takeOff()
-flyingRobot.sayHi()
-
-// import './style.css'
 // import * as THREE from 'three'
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 // import * as dat from 'lil-gui'
