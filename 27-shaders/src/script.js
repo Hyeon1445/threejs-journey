@@ -21,6 +21,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+const flagTexture = textureLoader.load('/textures/flag-french.jpg')
 
 /**
  * Test mesh
@@ -39,13 +40,19 @@ geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1)) // aRand
 const material = new THREE.RawShaderMaterial({
     vertexShader: testVertexShader,
     fragmentShader: testFragmentShader,
-    side: THREE.DoubleSide,
-    // wireframe: true,
-    // transparent: true,
+    uniforms: {
+        uFrequency: { value: new THREE.Vector2(10, 5) },
+        uTime: { value: 0 },
+        uColor: { value:new THREE.Color('orange') },
+        uTexture: { value: flagTexture }
+    }
 })
+gui.add(material.uniforms.uFrequency.value, 'x').min(0).max(20).step(0.01).name('frequencyX')
+gui.add(material.uniforms.uFrequency.value, 'y').min(0).max(20).step(0.01).name('frequencyY')
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material)
+// mesh.scale.y = 2 / 3
 scene.add(mesh)
 
 /**
@@ -100,6 +107,10 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update material
+    material.uniforms.uTime.value = elapsedTime
+    // Do not use Date.now() for the uTime because the number is too big for a shader
 
     // Update controls
     controls.update()
