@@ -37,7 +37,7 @@ geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1)) // aRand
  
 
 // Material
-const material = new THREE.RawShaderMaterial({
+const material = new THREE.ShaderMaterial({
     vertexShader: testVertexShader,
     fragmentShader: testFragmentShader,
     uniforms: {
