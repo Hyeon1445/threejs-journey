@@ -2,6 +2,8 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
+import testVertexShader from './shaders/test/vertex.glsl'
+import testFragmentShader from './shaders/test/fragment.glsl'
 
 /**
  * Base
@@ -25,9 +27,22 @@ const textureLoader = new THREE.TextureLoader()
  */
 // Geometry
 const geometry = new THREE.PlaneGeometry(1, 1, 32, 32)
+const count = geometry.attributes.position.count
+const randoms = new Float32Array(count)
+for(let i = 0; i <count; i++) {
+    randoms[i] = Math.random()
+}
+geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1)) // aRandom의 a: attribute
+ 
 
 // Material
-const material = new THREE.MeshBasicMaterial()
+const material = new THREE.RawShaderMaterial({
+    vertexShader: testVertexShader,
+    fragmentShader: testFragmentShader,
+    side: THREE.DoubleSide,
+    // wireframe: true,
+    // transparent: true,
+})
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material)
